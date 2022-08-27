@@ -47,7 +47,7 @@ systemd:
 
     - name: mc.service
       enabled: true
-      contents: |
+      contents: |-
         [Unit]
         Description=Minecraft Service
         After=docker.service
