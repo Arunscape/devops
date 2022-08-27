@@ -19,7 +19,8 @@ resources:
         - network: { get_param: net }
         - port: { get_resource: mc_port }
       user_data:
-        get_file: https://raw.githubusercontent.com/Arunscape/devops/main/minecraft.bu
+        str_replace:
+          template: {get_file: https://raw.githubusercontent.com/Arunscape/devops/main/minecraft.bu}
 
 
   mc_port:
