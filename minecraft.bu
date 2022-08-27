@@ -52,6 +52,8 @@ systemd:
         Description=Minecraft Service
         After=docker.service
         Requires=docker.service
+        After=var-minecraft.mount
+        Requires=var-minecraft.mount
 
         [Service]
         TimeoutStartSec=0
