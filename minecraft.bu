@@ -74,7 +74,6 @@ systemd:
           -e VERSION=LATEST \
           -e ENABLE_WHITELIST=TRUE \
           -e WHITELIST=Arunscape,Birdosaurus,mrdrprofalex,Rallozar,ManoftheHill7,0rderedcha0s,Nigels_Life,petelliott332,jacobreckhard,izzymtvox,holdemcowboys,DistantEch0,ashfreed,FrankCassel,Rampagio,MintChocCrip,don_page,big_fam_69,apac1ka,SuperScribbles23,bravetree,wasabi5432,Vicky6969,Joeboblow \
-          -e ENABLE_RCON=true \
           -v /var/minecraft/mc118/data:/data:Z \
           --net mc118_default \
           --network-alias minecraft-server \
