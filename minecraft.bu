@@ -11,10 +11,10 @@ passwd:
 
 
 storage:
-  directories:
-    - path: /minecraft
+#  directories:
+#    - path: /var/minecraft
   filesystems:
-    - path: /minecraft
+    - path: /var/minecraft
       device: /dev/disk/by-id/virtio-29f30b4b-2399-4759-9
       format: ext4
       with_mount_unit: true
