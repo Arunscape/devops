@@ -16,7 +16,7 @@ resources:
       # key_name: laptop
       flavor: g3.medium.auto-destruct
       networks:
-        - network: { get_param: net }     
+        - network: { get_param: net }
       user_data:
         get_file: https://raw.githubusercontent.com/Arunscape/devops/main/minecraft.bu
 
@@ -32,3 +32,20 @@ resources:
       instance_uuid: { get_resource: minecraft }
       volume_id: 29f30b4b-2399-4759-950f-d3dea67df415
       # /dev/disk/by-id/virtio-29f30b4b-2399-4759-950f-d3dea67df415
+
+  security_group:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: mc_securitygroup
+      description: SSH and 25565
+      rules:
+        - protocol: ssh
+        - protocol: tcp
+          port_range_min: 25565
+          port_range_max: 25565
+
+  security_group_attachment:
+    type: Rackspace::Neutron::SecurityGroupAttachment
+    properties:
+      port: { get_attr: [ minecraft, addresses, public, 0, port ] }
+      security_group: {get_resource: security_group}
