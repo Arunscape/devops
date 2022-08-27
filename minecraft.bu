@@ -5,9 +5,16 @@ passwd:
     - name: core
       ssh_authorized_keys:
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHVMzs2dfpHbo76Yuu4tylF4CdRLmwDi1Ni1SwN2FB/8 arunscape@pop-os
+
+
+
+
+
 storage:
+  directories:
+    - path: /minecraft
   filesystems:
-    - path: /media/minecraft
+    - path: /minecraft
       device: /dev/disk/by-id/virtio-29f30b4b-2399-4759-9
       format: ext4
       with_mount_unit: true
