@@ -1,0 +1,34 @@
+heat_template_version: 2018-03-02
+
+description: Minecraft
+
+parameters:
+  net:
+    description: name of network used to launch instance.
+    type: string
+    default: default
+
+resources:
+  minecraft:
+    type: OS::Nova::Server
+    properties:
+      image: fedora-coreos-36.20220806.3.0-openstack.x86_64
+      key_name: laptop
+      flavor: g3.medium.auto-destruct
+      networks:
+        - network: { get_param: net }     
+      user_data:
+        get_file: https://raw.githubusercontent.com/Arunscape/devops/main/minecraft.bu
+
+  association:
+    type: OS::Neutron::FloatingIPAssociation
+    properties:
+      floatingip_id: c312d85c-891b-4cff-ab94-0a5e57c09247
+      port_id: { get_attr: [minecraft, addresses, { get_param: net }, 0, port] }
+
+  volume_attachment:
+    type: OS::Cinder::VolumeAttachment
+    properties:
+      instance_uuid: { get_resource: minecraft }
+      volume_id: 29f30b4b-2399-4759-950f-d3dea67df415
+      # /dev/disk/by-id/virtio-29f30b4b-2399-4759-950f-d3dea67df415
