@@ -1,0 +1,25 @@
+#cloud-config
+autoinstall:
+  version: 1
+  identity:
+    hostname: mc.arun.gg
+    username: ubuntu
+  ssh:
+    authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHVMzs2dfpHbo76Yuu4tylF4CdRLmwDi1Ni1SwN2FB/8 arunscape@pop-os
+    allow-pw: false
+    
+    
+  locale: en_CA.UTF-8
+  keyboard:
+    layout: us
+    
+  update: true
+# apt:
+#     preserve_sources_list: false
+#     primary:
+#         - arches: [i386, amd64]
+#           uri: "http://archive.ubuntu.com/ubuntu"
+#         - arches: [default]
+#           uri: "http://ports.ubuntu.com/ubuntu-ports"
+#     geoip: true
