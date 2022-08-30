@@ -1,6 +1,14 @@
 #cloud-config
+preserve_hostname: false
+hostname: fedora36
+ssh_pwauth: false
+fqdn: mc.arun.gg
+
+mounts:
+  # <file system> <dir> <type> <options> <dump> <pass>
+  - [/dev/disk/by-id/virtio-29f30b4b-2399-4759-9, /minecraft, ext4, defaults, 0, 2]
 users:
-  - name: rocky
+  - name: fedora
     groups: wheel
     lock_passwd: false
     shell: /bin/bash

@@ -19,7 +19,7 @@ resources:
         - port: { get_resource: mc_port }
       user_data:
         # get_file: https://arunscape.github.io/devops/minecraft.ign
-        get_file: https://raw.githubusercontent.com/Arunscape/devops/main/rocky-cloudinit.yml
+        get_file: https://raw.githubusercontent.com/Arunscape/devops/main/fedora-cloudinit.yml
       user_data_format: RAW
 
   mc_port:
