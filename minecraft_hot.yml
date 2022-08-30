@@ -12,7 +12,7 @@ resources:
   minecraft:
     type: OS::Nova::Server
     properties:
-      image: 8929b745-f494-4d49-855c-c627296e7e5e
+      image: e7b78269-8447-46cd-b579-4eb48286774f
       flavor: g3.medium.auto-destruct
       networks:
         - network: { get_param: net }
