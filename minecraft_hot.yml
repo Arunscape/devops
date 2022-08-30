@@ -12,14 +12,14 @@ resources:
   minecraft:
     type: OS::Nova::Server
     properties:
-      image: fedora-coreos-36.20220806.3.0-openstack.x86_64
-      # key_name: laptop
+      image: 8929b745-f494-4d49-855c-c627296e7e5e
       flavor: g3.medium.auto-destruct
       networks:
         - network: { get_param: net }
         - port: { get_resource: mc_port }
       user_data:
-        get_file: https://arunscape.github.io/devops/minecraft.ign
+        # get_file: https://arunscape.github.io/devops/minecraft.ign
+        get_file: https://raw.githubusercontent.com/Arunscape/devops/main/rocky-cloudinit.yml
       user_data_format: RAW
 
   mc_port:
