@@ -1,0 +1,44 @@
+---
+
+# - name: Install Required Packages
+#   apt:
+#     name:
+#     # - jq
+#     # - curl
+#     # - wget
+#     # - default-jre-headless
+#     update_cache: yes
+#     state: latest
+
+# - name: Prepare /minecraft folder
+#   file:
+#     path: /minecraft
+#     state: directory
+
+# - name: Agree to eula
+#   shell:
+#     - "echo eula=true > /minecraft/eula.txt"
+
+# - name: Download Minecraft Server
+#   ansible.builtin.shell: |
+#     VERSION=$(curl https://api.purpurmc.org/v2/purpur | jq -r .versions[-1])
+#     wget https://api.purpurmc.org/v2/purpur/$VERSION/latest/download -O /minecraft/server.jar
+
+# - name: va
+
+# # https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft/
+# - name: Set JVM Arguments
+#   file:
+#     path: /minecraft/start-mc-server.sh
+#     content: |
+#       #!/usr/bin/env bash
+#       # MEMORY=$(free -m | awk '/^Mem:/{print $2}')
+#       # hardcode 7G ram for now (10G is recommended)
+#       java -Xms7G -Xmx7G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar server.jar nogui
+#       # if more than 12G
+#       # java -Xms20G -Xmx20G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=40 -XX:G1MaxNewSizePercent=50 -XX:G1HeapRegionSize=16M -XX:G1ReservePercent=15 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=20 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar server.jar nogui
+  
+#     mode: +x  
+  
+
+
