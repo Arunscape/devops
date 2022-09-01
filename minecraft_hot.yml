@@ -13,7 +13,8 @@ resources:
     type: OS::Nova::Server
     properties:
       image: e7b78269-8447-46cd-b579-4eb48286774f
-      flavor: g3.medium.auto-destruct
+      #flavor: g3.medium.auto-destruct
+      flavor: m1.large
       networks:
         - network: { get_param: net }
         - port: { get_resource: mc_port }
