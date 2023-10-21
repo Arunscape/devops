@@ -1,0 +1,91 @@
+---
+- name: minecraft
+  hosts: all
+  connection: ssh
+  vars_files:
+    - vars/rocky.yml
+
+  tasks:
+
+    - name: Install packages
+      become: true
+      ansible.builtin.package:
+        name: "{{ rocky_packages }}"
+        state: present
+
+
+    - name: Enable Services
+      become: true
+      async: true
+      poll: 0
+      ansible.builtin.service:
+        name: "{{ item }}"
+        enabled: true
+      loop:
+        - sshd
+        - podman.socket
+
+    - name: Harden SSH
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      loop:
+        - { regexp: '^#PermitRootLogin', line: 'PermitRootLogin no' }
+        - { regexp: '^#PasswordAuthentication', line: 'PasswordAuthentication no'}
+      notify:
+        - Restart sshd
+
+          #    - name: Add myself to groups
+          #      become: true
+          #      async: true
+          #      poll: 0
+          #      ansible.builtin.user:
+          #        name: arunscape
+          #        groups:
+          #          - input
+
+    - name: Firewalld allow tcp on port 25565
+      become: true
+      ansible.posix.firewalld:
+        zone: public
+        port: 25565/tcp
+        state: enabled
+        permanent: true
+      notify:
+        - Reload firewalld
+
+    - name: Create minecraft folder
+      ansible.builtin.file:
+        path: /home/arunscape/minecraft
+        state: directory
+
+    - name: Upload compose file
+      ansible.builtin.template:
+        src: ../docker/docker-compose.yml
+        dest: /home/arunscape/minecraft/docker-compose.yml
+
+
+    - name: Start minecraft server
+      ansible.builtin.shell:
+        cmd: |
+          cd /home/arunscape/minecraft
+          #docker-compose up -d
+          podman-compose up -d
+
+  handlers:
+    - name: Restart sshd
+      become: true
+      async: true
+      poll: 0
+      ansible.builtin.service:
+        name: sshd
+        state: reloaded
+        enabled: true
+
+    - name: Reload firewalld
+      become: true
+      ansible.builtin.shell: |
+        sudo firewall-cmd --reload
+

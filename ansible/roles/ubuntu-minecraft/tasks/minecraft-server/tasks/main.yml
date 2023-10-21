@@ -1,9 +1,0 @@
----
-# - name: Make /minecraft directory
-#   file:
-#     path: /minecraft
-#     state: directory  
-- name: Obtain
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/Arunscape/devops/main/docker/mc-server-compose.yml
-    dest: /minecraft/docker-compose.yml

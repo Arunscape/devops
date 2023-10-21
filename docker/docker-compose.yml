@@ -1,0 +1,40 @@
+version: "3"
+services:
+  minecraft-server:
+    ports:
+      - "25565:25565"
+        #- "25575:25575"
+
+    environment:
+      EULA: "TRUE"
+      ONLINE_MODE: "true"
+      SEED: "2"
+      VIEW_DISTANCE: "32"
+      SIMULATION_DISTANCE: "32"
+      DIFFICULTY: "hard"
+      MOTD: "I play hermitron go everyday"
+      SNOOPER_ENABLED: "false"
+      MODE: "survival"
+      TYPE: PURPUR
+      SPAWN_PROTECTION: 0
+      OPS: "Arunscape"
+      ICON: "https://upload.wikimedia.org/wikipedia/commons/1/13/Hilbert3d-step3.png"
+      VERSION: "LATEST"
+      ENABLE_WHITELIST: "TRUE"
+      WHITELIST: "Arunscape,Birdosaurus,mrdrprofalex,Rallozar,ManoftheHill7,0rderedChaos,Nigels_Life,petelliott332,jacobreckhard,holdemcowboys,DistantEch0,ashfreed,Rampagio,MintChocCrip,don_page,big_fam_69,apac1ka,SuperScribbles23,bravetree,wasabi5432,Vicky6969,Joeboblow,GinjaninjaS7,Mibbsie"
+        #ENABLE_RCON: "true"
+        #      RCON_PASSWORD: "changeme"
+      MAX_MEMORY: 7000M
+      USE_AIKAR_FLAGS: "true"
+      USE_SIMD_FLAGS: "true"
+
+    volumes:
+      - "./data:/data:Z"
+
+    image: docker.io/itzg/minecraft-server
+
+    container_name: mc
+
+    tty: true
+    stdin_open: true
+    restart: unless-stopped

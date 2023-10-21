@@ -1,0 +1,6 @@
+rocky_packages:
+  - vim
+  - podman
+  - podman-docker
+  - podman-compose
+    #  - docker-compose
